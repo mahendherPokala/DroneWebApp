@@ -1,0 +1,3082 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Indigenous high-payload autonomous aerial logistics. Explore concept platforms, a simulated ground control system and a four-tier execution engine."
+    />
+    <meta name="theme-color" content="#0B0F17" />
+    <title>[COMPANY_NAME] — Autonomous aerial logistics</title>
+    <style>
+      :root {
+        --bg-primary: #0b0f17;
+        --bg-secondary: #111723;
+        --bg-card: #161b26;
+        --bg-glass: rgba(22, 27, 38, 0.75);
+        --border-primary: #1f293d;
+        --border-glow: #00f2fe;
+        --text-primary: #f3f4f6;
+        --text-secondary: #9ca3af;
+        --accent-cyan: #00f2fe;
+        --accent-blue: #3b82f6;
+        --accent-green: #10b981;
+        --accent-amber: #f59e0b;
+        --accent-red: #ef4444;
+        --font-sans:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 105px;
+      }
+      body {
+        margin: 0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font: 16px/1.65 var(--font-sans);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M64 0H0V64' fill='none' stroke='%231F293D' stroke-opacity='.3'/%3E%3C/svg%3E");
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button,
+      a,
+      input,
+      select,
+      textarea,
+      summary {
+        -webkit-tap-highlight-color: transparent;
+      }
+      button,
+      a {
+        touch-action: manipulation;
+      }
+      button {
+        cursor: pointer;
+        color: inherit;
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.55;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      svg {
+        max-width: 100%;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.15;
+        letter-spacing: -0.04em;
+      }
+      h2 {
+        font-size: clamp(30px, 4vw, 46px);
+      }
+      h3 {
+        font-size: 23px;
+      }
+      p {
+        color: var(--text-secondary);
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent-cyan);
+        outline-offset: 5px;
+      }
+      ::selection {
+        background: #00f2fe;
+        color: #0b0f17;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      .wrap {
+        width: min(1260px, calc(100% - 64px));
+        margin: auto;
+      }
+      .mono,
+      .eyebrow {
+        font-family: var(--font-mono);
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--accent-cyan);
+      }
+      .muted {
+        color: var(--text-secondary);
+      }
+      .cyan {
+        color: var(--accent-cyan);
+      }
+      .gradient {
+        background: linear-gradient(
+          120deg,
+          var(--accent-cyan),
+          var(--accent-blue)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      .skip {
+        position: fixed;
+        top: -100px;
+        z-index: 50;
+        background: var(--accent-cyan);
+        color: #000;
+        padding: 12px;
+      }
+      .skip:focus {
+        top: 0;
+      }
+      .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 20px;
+        border: 1px solid #354155;
+        background: var(--bg-card);
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 650;
+        transition: 0.2s;
+      }
+      .btn:hover {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 20px #00f2fe26;
+      }
+      .primary {
+        background: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+        color: #031519;
+      }
+      .small {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: -0.04em;
+      }
+      .brand svg {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        color: var(--accent-cyan);
+      }
+      .ind {
+        font: 11px var(--font-mono);
+        padding: 4px 6px;
+        border: 1px solid var(--border-primary);
+        border-top-color: #ff9933;
+        border-bottom-color: #138808;
+        letter-spacing: 0.1em;
+      }
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(11, 15, 23, 0.88);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-primary);
+      }
+      .header.scrolled {
+        border-bottom-color: #00f2fe55;
+      }
+      .navrow {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .navlinks {
+        display: flex;
+        gap: 20px;
+      }
+      .navlinks a {
+        font-size: 13px;
+        color: #bbc3d0;
+      }
+      .navlinks a:hover {
+        color: var(--accent-cyan);
+      }
+      .navcta {
+        display: flex;
+        gap: 8px;
+      }
+      .menu {
+        display: none;
+      }
+      .hero {
+        padding: 77px 0 0;
+        position: relative;
+        background: radial-gradient(
+          ellipse at 80% 40%,
+          #00c6d30b,
+          transparent 55%
+        );
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(42px, 5.2vw, 70px);
+        line-height: 1.05;
+        margin: 24px 0;
+        max-width: 680px;
+      }
+      .hero .intro {
+        font-size: 17px;
+        max-width: 610px;
+        margin-bottom: 28px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font: 12px var(--font-mono);
+        color: var(--accent-cyan);
+        border: 1px solid #00f2fe38;
+        background: #00f2fe08;
+        padding: 7px 10px;
+        border-radius: 4px;
+        letter-spacing: 0.04em;
+      }
+      .note {
+        font-size: 12px;
+        margin-top: 18px;
+        max-width: 590px;
+      }
+      .radar-panel {
+        position: relative;
+        min-width: 0;
+      }
+      .radar-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        font: 11px var(--font-mono);
+        color: #94a8b8;
+        letter-spacing: 0.07em;
+      }
+      .radar {
+        width: 100%;
+        display: block;
+        overflow: visible;
+      }
+      .radar .sweep {
+        transform-origin: 250px 250px;
+        animation: spin 12s linear infinite;
+      }
+      .radar .ring {
+        animation: breathe 4s ease-in-out infinite;
+      }
+      .radar-target {
+        cursor: pointer;
+      }
+      .radar-target:focus {
+        outline: none;
+      }
+      .radar-target:focus circle,
+      .radar-target:hover circle {
+        stroke: white;
+        stroke-width: 3;
+      }
+      .target-info {
+        border: 1px solid #00f2fe45;
+        background: #111d29;
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        border-radius: 5px;
+      }
+      .target-info small {
+        display: block;
+        color: var(--text-secondary);
+        font: 11px var(--font-mono);
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 65px;
+        border-block: 1px solid var(--border-primary);
+        background: #11172388;
+      }
+      .metric {
+        padding: 26px 24px;
+        border-right: 1px solid var(--border-primary);
+      }
+      .metric:first-child {
+        padding-left: 0;
+      }
+      .metric:last-child {
+        border: 0;
+      }
+      .metric strong {
+        display: block;
+        font: 600 clamp(20px, 2.3vw, 30px) var(--font-mono);
+        color: var(--accent-cyan);
+      }
+      .metric span {
+        display: block;
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 8px;
+      }
+      .section {
+        padding: 90px 0;
+        border-bottom: 1px solid var(--border-primary);
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 35px;
+        margin-bottom: 35px;
+      }
+      .section-head h2 {
+        margin-top: 14px;
+      }
+      .section-head p {
+        max-width: 380px;
+        font-size: 14px;
+      }
+      .section-num {
+        color: #65748a;
+        margin-right: 15px;
+      }
+      .grid4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid var(--border-primary);
+        background: var(--bg-glass);
+        backdrop-filter: blur(12px);
+        border-radius: 8px;
+        padding: 25px;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .card:hover {
+        border-color: #00f2fe55;
+        box-shadow: 0 0 20px #00f2fe26;
+      }
+      .engine-card {
+        display: flex;
+        flex-direction: column;
+      }
+      .stage-icon {
+        font: 28px var(--font-mono);
+        color: var(--accent-cyan);
+        margin: 15px 0 25px;
+      }
+      .engine-card h3 {
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+      .engine-card p {
+        font-size: 14px;
+        margin-bottom: 22px;
+      }
+      .text-btn {
+        border: 0;
+        background: none;
+        color: var(--accent-cyan);
+        padding: 0;
+        font-size: 14px;
+        text-align: left;
+        margin-top: auto;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+      }
+      .gcs {
+        background: #0b101a;
+      }
+      .console {
+        border: 1px solid #314057;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 20px 70px #0004;
+      }
+      .console-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 18px 24px;
+        background: #182130;
+        align-items: center;
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent-green);
+        box-shadow: 0 0 9px #10b98188;
+        display: inline-block;
+      }
+      .running .dot {
+        animation: breathe 2s infinite;
+      }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .console .tabs {
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--border-primary);
+        background: var(--bg-secondary);
+      }
+      .tab {
+        border: 1px solid transparent;
+        background: transparent;
+        padding: 10px 16px;
+        border-radius: 5px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        text-align: left;
+      }
+      .tab span {
+        display: block;
+        font: 11px var(--font-mono);
+        margin-top: 3px;
+      }
+      .tab[aria-selected="true"] {
+        color: var(--accent-cyan);
+        background: #00f2fe0b;
+        border-color: #00f2fe55;
+      }
+      .console-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        padding: 24px;
+        background: #101622;
+      }
+      .map-panel {
+        min-width: 0;
+        background: #0b111b;
+        border: 1px solid var(--border-primary);
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .map-top,
+      .map-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 15px;
+        font: 11px var(--font-mono);
+        color: #a9b6c6;
+      }
+      .route-map {
+        width: 100%;
+        flex: 1;
+        min-height: 220px;
+        max-height: 290px;
+      }
+      .map-bottom {
+        border-top: 1px solid var(--border-primary);
+        font-size: 12px;
+      }
+      .telemetry {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .readout {
+        padding: 15px;
+        background: #0b111b;
+        border: 1px solid var(--border-primary);
+        border-radius: 5px;
+        min-width: 0;
+      }
+      .label {
+        font: 11px var(--font-mono);
+        letter-spacing: 0.05em;
+        color: #99aabd;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .value {
+        font: 600 26px var(--font-mono);
+        line-height: 1.25;
+      }
+      .value.compact {
+        font-size: 15px;
+      }
+      .subvalue {
+        font: 11px/1.6 var(--font-mono);
+        color: #a9b6c6;
+        margin-top: 8px;
+        overflow-wrap: anywhere;
+      }
+      .bar {
+        height: 5px;
+        background: #263247;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 12px;
+      }
+      .bar > span {
+        display: block;
+        height: 100%;
+        background: var(--accent-cyan);
+        transition: width 0.5s;
+      }
+      .progress-area {
+        padding: 0 24px 22px;
+        background: #101622;
+      }
+      .progress-title {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        font: 12px var(--font-mono);
+      }
+      .waypoints {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font: 10px var(--font-mono);
+        margin-top: 12px;
+        color: #9ca3af;
+      }
+      .waypoints .current {
+        color: var(--accent-cyan);
+      }
+      .console-foot {
+        padding: 12px 24px;
+        background: #17202e;
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        font: 11px var(--font-mono);
+        color: #a2b2c3;
+      }
+      .fleet {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .fleet-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 27px;
+      }
+      .fleet-card .eyebrow {
+        font-size: 11px;
+      }
+      .fleet-card h3 {
+        font-size: 29px;
+        margin: 18px 0 12px;
+      }
+      .fleet-card > p {
+        font-size: 14px;
+        min-height: 72px;
+      }
+      .payload-number {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin: 25px 0 15px;
+      }
+      .payload-number strong {
+        font: 500 54px var(--font-mono);
+        letter-spacing: -0.08em;
+        color: var(--accent-cyan);
+      }
+      .payload-number span {
+        font: 13px var(--font-mono);
+        color: #a5b5c5;
+      }
+      .spec-list {
+        margin: 0 0 24px;
+      }
+      .spec-list div {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        border-bottom: 1px solid var(--border-primary);
+        padding: 10px 0;
+        font-size: 13px;
+      }
+      .spec-list dt {
+        color: #a5b5c5;
+      }
+      .spec-list dd {
+        margin: 0;
+        text-align: right;
+        font-family: var(--font-mono);
+      }
+      details {
+        font-size: 13px;
+        color: #b6c1cf;
+        margin-bottom: 22px;
+      }
+      summary {
+        cursor: pointer;
+        color: var(--accent-cyan);
+        padding: 10px 0;
+      }
+      details p {
+        margin: 10px 0;
+        overflow-wrap: anywhere;
+      }
+      .fleet-card .btn {
+        margin-top: auto;
+      }
+      .tag {
+        font: 11px var(--font-mono);
+        display: inline-block;
+        padding: 4px 7px;
+        border: 1px solid #314055;
+        margin: 4px 4px 4px 0;
+        border-radius: 3px;
+        color: #c5d2e1;
+      }
+      .mission-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--bg-secondary);
+      }
+      .mission-tabs {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--border-primary);
+        padding: 14px;
+        gap: 7px;
+      }
+      .mission-tabs .tab {
+        padding: 20px 15px;
+      }
+      .mission-content {
+        padding: 38px;
+        display: grid;
+        grid-template-columns: 1fr 160px;
+        gap: 35px;
+        align-items: center;
+      }
+      .mission-content h3 {
+        font-size: 30px;
+        margin: 12px 0 18px;
+      }
+      .mission-content p {
+        font-size: 15px;
+      }
+      .mission-content ul {
+        padding-left: 20px;
+        color: #bdc8d6;
+        font-size: 14px;
+      }
+      .mission-stat {
+        border-left: 1px solid #354155;
+        padding-left: 25px;
+      }
+      .mission-stat strong {
+        display: block;
+        font: 36px var(--font-mono);
+        color: var(--accent-cyan);
+      }
+      .mission-stat span {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .table-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 13px;
+        color: #b9c4d2;
+      }
+      .table-wrap {
+        overflow: auto;
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        min-width: 720px;
+        background: #101622;
+      }
+      caption {
+        text-align: left;
+        padding: 14px 20px;
+        color: #9ca3af;
+        font-size: 12px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 17px 20px;
+        border-bottom: 1px solid var(--border-primary);
+        vertical-align: top;
+      }
+      thead th {
+        font: 12px var(--font-mono);
+        color: var(--accent-cyan);
+        background: #192130;
+      }
+      tbody th {
+        font-weight: 400;
+        color: #b9c4d2;
+        width: 29%;
+      }
+      td {
+        width: 23.66%;
+      }
+      tbody tr:hover {
+        background: #1b2738;
+      }
+      td.highlight,
+      th.highlight {
+        background: #00f2fe08;
+      }
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 30px;
+      }
+      .trust-grid article {
+        border-left: 2px solid #00f2fe77;
+        padding-left: 22px;
+      }
+      .trust-grid h3 {
+        font-size: 19px;
+        margin-bottom: 12px;
+      }
+      .trust-grid p {
+        font-size: 14px;
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 70px;
+      }
+      .contact-copy h2 {
+        margin: 16px 0 25px;
+      }
+      .contact-copy p {
+        font-size: 16px;
+      }
+      .contact-copy .mono {
+        margin-top: 35px;
+        font-size: 12px;
+        color: var(--accent-cyan);
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .field label {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 7px;
+        color: #cbd5e1;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        background: #0b1019;
+        color: #eef2f8;
+        border: 1px solid #334055;
+        border-radius: 5px;
+        padding: 12px 13px;
+        font-size: 14px;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        outline: none;
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 12px #00f2fe22;
+      }
+      .field textarea {
+        resize: vertical;
+        min-height: 115px;
+      }
+      .full {
+        grid-column: 1/-1;
+      }
+      fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+      legend {
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: #cbd5e1;
+      }
+      .checks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        font-size: 13px;
+        color: #bfcbd8;
+      }
+      .checks label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .checks input {
+        accent-color: var(--accent-cyan);
+        width: 16px;
+        height: 16px;
+      }
+      .error {
+        display: block;
+        color: #fca5a5;
+        font-size: 12px;
+        min-height: 0;
+      }
+      .error:not(:empty) {
+        margin-top: 5px;
+      }
+      .field [aria-invalid="true"] {
+        border-color: var(--accent-red);
+      }
+      .form-note {
+        font-size: 12px;
+        margin: 16px 0;
+      }
+      .success {
+        border: 1px solid #10b98177;
+        background: #10b9810a;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .success h3 {
+        font-size: 20px;
+        color: #6ee7b7;
+      }
+      .success p {
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      .footer {
+        padding: 48px 0 25px;
+        background: #080c13;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 50px;
+      }
+      .footer p {
+        font-size: 13px;
+        margin-top: 14px;
+        max-width: 340px;
+      }
+      .footer h3 {
+        font: 12px var(--font-mono);
+        color: #8ca1b8;
+        margin-bottom: 16px;
+        letter-spacing: 0.06em;
+      }
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        align-items: start;
+      }
+      .footer-links a,
+      .footer-links button {
+        font: 13px var(--font-sans);
+        border: 0;
+        background: none;
+        padding: 0;
+        color: #bac6d5;
+        text-align: left;
+      }
+      .footer-links a:hover,
+      .footer-links button:hover {
+        color: var(--accent-cyan);
+      }
+      .footer-bottom {
+        margin-top: 38px;
+        padding-top: 22px;
+        border-top: 1px solid var(--border-primary);
+        font-size: 11px;
+        color: #8292a8;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      dialog {
+        background: #141c29;
+        border: 1px solid #00f2fe66;
+        color: var(--text-primary);
+        border-radius: 12px;
+        padding: 32px;
+        width: min(580px, calc(100% - 36px));
+        max-height: 85vh;
+        box-shadow: 0 0 100px #000a;
+      }
+      dialog::backdrop {
+        background: #03070dd9;
+        backdrop-filter: blur(5px);
+      }
+      dialog h2 {
+        font-size: 28px;
+        margin: 20px 0;
+      }
+      dialog p {
+        font-size: 15px;
+      }
+      dialog ul {
+        font-size: 14px;
+        color: #c0ccda;
+        padding-left: 20px;
+      }
+      dialog li {
+        margin: 10px 0;
+      }
+      .dialog-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .modal-close {
+        background: none;
+        border: 1px solid #3c4b61;
+        border-radius: 5px;
+        padding: 5px 12px;
+        font-size: 20px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes breathe {
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      @media (min-width: 1100px) and (max-width: 1280px) {
+        .navlinks {
+          gap: 12px;
+        }
+        .navlinks a {
+          font-size: 12px;
+        }
+        .navcta .secondary {
+          display: none;
+        }
+        .brand {
+          font-size: 16px;
+        }
+        .wrap {
+          width: calc(100% - 48px);
+        }
+      }
+      @media (max-width: 1099px) {
+        .navlinks {
+          display: none;
+          position: absolute;
+          top: 80px;
+          left: 0;
+          right: 0;
+          padding: 20px 30px;
+          background: #111723;
+          border-bottom: 1px solid var(--border-primary);
+          flex-direction: column;
+        }
+        .navlinks.open {
+          display: flex;
+        }
+        .menu {
+          display: inline-flex;
+        }
+        .navcta .secondary {
+          display: none;
+        }
+        .hero-grid {
+          gap: 20px;
+        }
+        .hero h1 {
+          font-size: 48px;
+        }
+        .grid4 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .console-body {
+          grid-template-columns: 1fr;
+        }
+        .route-map {
+          max-height: 250px;
+        }
+        .contact-grid {
+          gap: 35px;
+        }
+        .fleet-card {
+          padding: 20px;
+        }
+        .fleet-card h3 {
+          font-size: 23px;
+        }
+        .mission-content {
+          grid-template-columns: 1fr;
+        }
+        .mission-stat {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          border-left: 0;
+          border-top: 1px solid #354155;
+          padding: 18px 0 0;
+        }
+        .metric {
+          padding: 22px 15px;
+        }
+      }
+      @media (max-width: 740px) {
+        .wrap {
+          width: calc(100% - 36px);
+        }
+        .navrow {
+          height: 70px;
+          gap: 8px;
+        }
+        .brand {
+          font-size: 14px;
+          gap: 7px;
+        }
+        .brand svg {
+          width: 27px;
+        }
+        .ind {
+          display: none;
+        }
+        .navcta {
+          gap: 5px;
+        }
+        .navcta .primary {
+          display: none;
+        }
+        .navlinks {
+          top: 70px;
+        }
+        .hero {
+          padding-top: 43px;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero h1 {
+          font-size: clamp(40px, 10vw, 58px);
+        }
+        .hero .intro {
+          font-size: 15px;
+        }
+        .pill {
+          font-size: 10px;
+        }
+        .radar-panel {
+          margin-top: 25px;
+          max-width: 450px;
+          justify-self: center;
+          width: 100%;
+        }
+        .radar {
+          max-height: 360px;
+        }
+        .metrics {
+          grid-template-columns: repeat(2, 1fr);
+          margin-top: 35px;
+        }
+        .metric,
+        .metric:first-child {
+          padding: 20px 12px;
+        }
+        .metric:nth-child(2) {
+          border-right: 0;
+        }
+        .metric:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--border-primary);
+        }
+        .metric strong {
+          font-size: 21px;
+        }
+        .section {
+          padding: 60px 0;
+        }
+        .section-head {
+          display: block;
+        }
+        .section-head p {
+          margin-top: 20px;
+        }
+        .grid4,
+        .fleet {
+          grid-template-columns: 1fr;
+        }
+        .engine-card {
+          padding: 23px;
+        }
+        .stage-icon {
+          margin: 10px 0 16px;
+        }
+        .console-head {
+          align-items: start;
+          padding: 15px;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .console .tabs {
+          padding: 12px;
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+        .console .tabs .tab {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 12px;
+          padding: 10px;
+        }
+        .console .tabs .tab span {
+          font-size: 10px;
+          margin: 0;
+        }
+        .console-body {
+          padding: 12px;
+          gap: 12px;
+        }
+        .readout {
+          padding: 12px;
+        }
+        .value {
+          font-size: 23px;
+        }
+        .value.compact {
+          font-size: 13px;
+        }
+        .telemetry {
+          gap: 8px;
+        }
+        .label {
+          font-size: 10px;
+        }
+        .progress-area {
+          padding: 6px 12px 20px;
+        }
+        .progress-title {
+          font-size: 10px;
+        }
+        .waypoints {
+          font-size: 9px;
+        }
+        .console-foot {
+          padding: 12px;
+        }
+        .fleet-card > p {
+          min-height: 0;
+        }
+        .mission-layout {
+          grid-template-columns: 1fr;
+        }
+        .mission-tabs {
+          border-right: 0;
+          border-bottom: 1px solid var(--border-primary);
+        }
+        .mission-tabs .tab {
+          padding: 12px;
+        }
+        .mission-content {
+          padding: 25px;
+          gap: 15px;
+        }
+        .mission-content h3 {
+          font-size: 25px;
+        }
+        .trust-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .checks {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 35px;
+        }
+        .footer-grid > div:first-child {
+          grid-column: 1/-1;
+        }
+        .footer-bottom {
+          flex-direction: column;
+        }
+        .table-controls {
+          flex-wrap: wrap;
+        }
+        .contact-grid .card {
+          padding: 22px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip">Skip to content</a>
+
+    <svg width="0" height="0" aria-hidden="true" style="position: absolute">
+      <defs>
+        <symbol id="drone-icon" viewBox="0 0 40 40">
+          <g fill="none" stroke="currentColor" stroke-width="1.7">
+            <path d="M13 13L27 27M13 27L27 13" />
+            <circle cx="10" cy="10" r="7" />
+            <circle cx="30" cy="10" r="7" />
+            <circle cx="10" cy="30" r="7" />
+            <circle cx="30" cy="30" r="7" />
+            <rect x="15" y="14" width="10" height="13" rx="3" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <header class="header">
+      <div class="wrap navrow">
+        <a class="brand" href="#main" aria-label="Company home">
+          <svg aria-hidden="true"><use href="#drone-icon" /></svg>
+          <span data-brand>[COMPANY_NAME]</span>
+          <span class="ind" title="India">IND</span>
+        </a>
+
+        <nav class="navlinks" id="navigation" aria-label="Main navigation">
+          <a href="#execution">Execution Engine</a>
+          <a href="#gcs">GCS Simulator</a>
+          <a href="#fleet">Drone Fleet</a>
+          <a href="#verticals">Mission Verticals</a>
+          <a href="#specs">Tech Matrix</a>
+        </nav>
+
+        <div class="navcta">
+          <a class="btn small secondary" href="#gcs">GCS Live View</a>
+          <a class="btn primary small" href="#contact">Request Demo</a>
+          <button
+            class="btn small menu"
+            aria-controls="navigation"
+            aria-expanded="false"
+            id="menu"
+          >
+            Menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <div class="hero-grid">
+            <div>
+              <span class="pill"
+                >🇮🇳 INDIGENOUS AUTONOMOUS AERIAL LOGISTICS</span
+              >
+              <h1>
+                Autonomous drone delivery.<br />
+                <span class="gradient">Extreme missions.</span>
+              </h1>
+              <p class="intro">
+                Engineered for India’s critical supply lines. Explore a proposed
+                5–15 kg fleet, AI spatial route planning and precision
+                ground-station docking for medical logistics and
+                extreme-environment resupply.
+              </p>
+              <div class="actions">
+                <a href="#gcs" class="btn primary">Launch GCS Simulator</a>
+                <a href="#fleet" class="btn" id="defense-link"
+                  >Explore Defense Specs</a
+                >
+              </div>
+              <p class="note">
+                Concept platform · Specifications are design targets, not
+                verified aircraft capabilities. All telemetry is simulated.
+              </p>
+            </div>
+
+            <div class="radar-panel">
+              <div class="radar-meta">
+                <span>REGIONAL AIRSPACE / SIMULATION</span>
+                <span>03 UNITS</span>
+              </div>
+
+              <svg
+                class="radar"
+                viewBox="0 0 500 500"
+                role="img"
+                aria-labelledby="radar-title"
+              >
+                <title id="radar-title">
+                  Interactive mission radar. Select a target to view its
+                  mission.
+                </title>
+                <defs>
+                  <radialGradient id="radar-bg">
+                    <stop stop-color="#0c333e" stop-opacity=".55" />
+                    <stop offset="1" stop-color="#0b0f17" stop-opacity="0" />
+                  </radialGradient>
+                  <linearGradient id="sweep-gradient">
+                    <stop stop-color="#00f2fe" stop-opacity="0" />
+                    <stop offset="1" stop-color="#00f2fe" stop-opacity=".22" />
+                  </linearGradient>
+                </defs>
+
+                <circle
+                  cx="250"
+                  cy="250"
+                  r="219"
+                  fill="url(#radar-bg)"
+                  stroke="#2b4c5c"
+                />
+
+                <g fill="none" stroke="#2b4c5c">
+                  <circle cx="250" cy="250" r="176" stroke-dasharray="2 6" />
+                  <circle cx="250" cy="250" r="130" />
+                  <circle class="ring" cx="250" cy="250" r="80" />
+                  <circle cx="250" cy="250" r="24" />
+                  <path d="M20 250H480M250 20V480" stroke-opacity=".65" />
+                  <path
+                    d="M95 95L405 405M95 405L405 95"
+                    stroke-dasharray="3 9"
+                  />
+                </g>
+
+                <path
+                  class="sweep"
+                  d="M250 250L250 32A218 218 0 0 1 468 250Z"
+                  fill="url(#sweep-gradient)"
+                />
+
+                <g fill="#8ba9b6" font-family="monospace" font-size="11">
+                  <text x="246" y="18">N</text>
+                  <text x="480" y="254">E</text>
+                  <text x="246" y="495">S</text>
+                  <text x="9" y="254">W</text>
+                  <text x="280" y="241">10 KM</text>
+                  <text x="393" y="241">30 KM</text>
+                </g>
+
+                <path
+                  d="M160 323L202 271L302 200L350 130"
+                  fill="none"
+                  stroke="#00f2fe"
+                  stroke-width="1.5"
+                  stroke-dasharray="5 5"
+                  opacity=".5"
+                />
+
+                <g
+                  class="radar-target"
+                  role="button"
+                  tabindex="0"
+                  data-radar="aero"
+                  aria-label="Select medical mission MED-402"
+                >
+                  <circle
+                    cx="160"
+                    cy="323"
+                    r="16"
+                    fill="#0e2933"
+                    stroke="#00f2fe"
+                  />
+                  <circle cx="160" cy="323" r="4" fill="#00f2fe" />
+                  <text
+                    x="180"
+                    y="329"
+                    fill="#b6d9e2"
+                    font-family="monospace"
+                    font-size="11"
+                  >
+                    MED-402
+                  </text>
+                </g>
+
+                <g
+                  class="radar-target"
+                  role="button"
+                  tabindex="0"
+                  data-radar="cargo"
+                  aria-label="Select enterprise mission IND-109"
+                >
+                  <circle
+                    cx="340"
+                    cy="305"
+                    r="16"
+                    fill="#0e2933"
+                    stroke="#3b82f6"
+                  />
+                  <circle cx="340" cy="305" r="4" fill="#3b82f6" />
+                  <text
+                    x="363"
+                    y="310"
+                    fill="#b6d9e2"
+                    font-family="monospace"
+                    font-size="11"
+                  >
+                    IND-109
+                  </text>
+                </g>
+
+                <g
+                  class="radar-target"
+                  role="button"
+                  tabindex="0"
+                  data-radar="vajra"
+                  aria-label="Select defense mission DEF-809"
+                >
+                  <circle
+                    cx="350"
+                    cy="130"
+                    r="16"
+                    fill="#2d2418"
+                    stroke="#f59e0b"
+                  />
+                  <circle cx="350" cy="130" r="4" fill="#f59e0b" />
+                  <text
+                    x="273"
+                    y="101"
+                    fill="#d9bd90"
+                    font-family="monospace"
+                    font-size="11"
+                  >
+                    DEF-809
+                  </text>
+                </g>
+
+                <circle cx="250" cy="250" r="5" fill="#00f2fe" />
+              </svg>
+
+              <div class="target-info">
+                <div>
+                  <strong id="radar-name">AeroLifter-X5</strong>
+                  <small id="radar-mission">MED-402 / MEDICAL CORRIDOR</small>
+                </div>
+                <a href="#gcs" class="cyan">View mission</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <strong>5–15 KG</strong>
+              <span>MODULAR PAYLOAD TARGET</span>
+            </div>
+            <div class="metric">
+              <strong>&lt; 2 CM</strong>
+              <span>RTK DOCKING TARGET</span>
+            </div>
+            <div class="metric">
+              <strong>−20° TO +50°C</strong>
+              <span>EXTREME-ENVIRONMENT TARGET</span>
+            </div>
+            <div class="metric">
+              <strong>100%</strong>
+              <span>AUTONOMOUS BVLOS DESIGN GOAL</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="execution">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">
+                <span class="section-num">01 /</span> The execution engine
+              </div>
+              <h2>Four tiers. One mission.</h2>
+            </div>
+            <p>
+              A proposed end-to-end architecture connecting spatial
+              intelligence, ground infrastructure and onboard autonomy.
+            </p>
+          </div>
+          <div class="grid4" id="engine-cards"></div>
+        </div>
+      </section>
+
+      <section class="section gcs" id="gcs">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">
+                <span class="section-num">02 /</span> Ground control system
+              </div>
+              <h2>Your fleet. In full view.</h2>
+            </div>
+            <p>
+              Explore three synthetic missions. Telemetry updates every two
+              seconds; no aircraft or external service is connected.
+            </p>
+          </div>
+
+          <div class="console">
+            <div class="console-head">
+              <div>
+                <span class="mono" style="font-size: 14px"
+                  >MISSION CONTROL</span
+                >
+                <span
+                  class="status running"
+                  id="feed-state"
+                  style="margin-left: 16px"
+                >
+                  <i class="dot"></i> SIMULATED FEED
+                </span>
+              </div>
+              <div class="actions">
+                <button class="btn small" id="pause" aria-pressed="false">
+                  Pause simulation
+                </button>
+                <button class="btn small" id="reset">Reset mission</button>
+              </div>
+            </div>
+
+            <div
+              class="tabs"
+              role="tablist"
+              aria-label="Select drone mission"
+              id="drone-tabs"
+            ></div>
+
+            <div role="tabpanel" id="mission-panel" tabindex="0">
+              <div class="console-body">
+                <div class="map-panel">
+                  <div class="map-top">
+                    <span id="map-region">HYDERABAD / MEDICAL</span>
+                    <span>ILLUSTRATIVE CORRIDOR</span>
+                  </div>
+
+                  <svg
+                    class="route-map"
+                    viewBox="0 0 520 285"
+                    role="img"
+                    aria-label="Simulated route from origin through three waypoints to destination"
+                  >
+                    <defs>
+                      <pattern
+                        id="map-grid"
+                        width="26"
+                        height="26"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <path
+                          d="M26 0H0V26"
+                          fill="none"
+                          stroke="#1f3446"
+                          stroke-width=".5"
+                        />
+                      </pattern>
+                    </defs>
+                    <rect width="520" height="285" fill="url(#map-grid)" />
+                    <g
+                      fill="none"
+                      stroke="#294054"
+                      stroke-width="1"
+                      opacity=".65"
+                    >
+                      <path
+                        d="M-20 70Q100 0 170 100T360 70T550 100M-20 90Q100 20 170 120T360 90T550 120M-20 110Q100 40 170 140T360 110T550 140M-20 130Q100 60 170 160T360 130T550 160M-20 150Q100 80 170 180T360 150T550 180M-20 170Q100 100 170 200T360 170T550 200"
+                      />
+                    </g>
+                    <path
+                      d="M55 222L150 178L258 194L365 98L465 52"
+                      stroke="#00f2fe"
+                      stroke-width="26"
+                      stroke-opacity=".055"
+                      fill="none"
+                    />
+                    <path
+                      id="route-line"
+                      d="M55 222L150 178L258 194L365 98L465 52"
+                      stroke="#00f2fe"
+                      stroke-opacity=".7"
+                      stroke-width="2"
+                      stroke-dasharray="5 6"
+                      fill="none"
+                    />
+                    <g fill="#0b111b" stroke="#00f2fe">
+                      <circle cx="55" cy="222" r="6" />
+                      <circle cx="150" cy="178" r="4" />
+                      <circle cx="258" cy="194" r="4" />
+                      <circle cx="365" cy="98" r="4" />
+                      <circle cx="465" cy="52" r="6" />
+                    </g>
+                    <g font-family="monospace" font-size="10" fill="#8da7bc">
+                      <text x="30" y="248">ORIGIN</text>
+                      <text x="135" y="158">WP 01</text>
+                      <text x="240" y="217">WP 02</text>
+                      <text x="343" y="79">WP 03</text>
+                      <text x="415" y="32">DESTINATION</text>
+                    </g>
+                    <g id="map-drone">
+                      <circle r="16" fill="#00f2fe18" stroke="#00f2fe55" />
+                      <path d="M0 -8L6 7L0 4L-6 7Z" fill="#00f2fe" />
+                    </g>
+                  </svg>
+
+                  <div class="map-bottom">
+                    <span id="tele-coords"></span>
+                    <span class="cyan" id="mission-id"></span>
+                  </div>
+                </div>
+
+                <div class="telemetry">
+                  <div class="readout">
+                    <div class="label">Altitude / AMSL</div>
+                    <div class="value" id="tele-alt"></div>
+                    <div class="subvalue" id="tele-clearance"></div>
+                  </div>
+                  <div class="readout">
+                    <div class="label">Airspeed / km/h</div>
+                    <div class="value" id="tele-speed"></div>
+                    <div class="subvalue" id="tele-wind"></div>
+                  </div>
+                  <div class="readout">
+                    <div class="label">Battery / SoC</div>
+                    <div class="value" id="tele-bat"></div>
+                    <div
+                      class="bar"
+                      role="progressbar"
+                      aria-label="Battery charge"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      id="battery-progress"
+                    >
+                      <span id="tele-bat-bar"></span>
+                    </div>
+                    <div class="subvalue" id="tele-voltage"></div>
+                  </div>
+                  <div class="readout">
+                    <div class="label">Attitude / degrees</div>
+                    <div class="value compact" id="tele-attitude"></div>
+                    <div class="subvalue" id="tele-link"></div>
+                  </div>
+                  <div class="readout">
+                    <div class="label">Landing station</div>
+                    <div class="value compact cyan" id="tele-station"></div>
+                    <div class="subvalue" id="tele-beacon"></div>
+                  </div>
+                  <div class="readout">
+                    <div class="label">Payload vault</div>
+                    <div class="value compact" id="tele-payload"></div>
+                    <div class="subvalue" id="tele-temp"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-area">
+                <div class="progress-title">
+                  <span id="tele-phase"></span>
+                  <span class="cyan" id="tele-progress-pct"></span>
+                </div>
+                <div
+                  class="bar"
+                  role="progressbar"
+                  aria-label="Mission progress"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  id="mission-progress"
+                >
+                  <span id="tele-progress-bar"></span>
+                </div>
+                <div class="waypoints" id="waypoints">
+                  <span>Origin</span>
+                  <span>Waypoint 1</span>
+                  <span>Waypoint 2</span>
+                  <span>Waypoint 3</span>
+                  <span>Destination</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="console-foot">
+              <span id="tele-log">SIM / Mission loaded</span>
+              <span id="last-update">UPDATE INTERVAL 2,000 MS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="fleet">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">
+                <span class="section-num">03 /</span> Modular airframe platforms
+              </div>
+              <h2>Built around the payload.</h2>
+            </div>
+            <p>
+              Three concept platforms for three operational needs. Figures below
+              are supplied design targets awaiting validation.
+            </p>
+          </div>
+          <div class="fleet" id="fleet-cards"></div>
+        </div>
+      </section>
+
+      <section class="section" id="verticals">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">
+                <span class="section-num">04 /</span> Mission verticals
+              </div>
+              <h2>Where the road ends.</h2>
+            </div>
+            <p>
+              Mission-specific payloads and ground workflows for critical
+              last-mile connections.
+            </p>
+          </div>
+
+          <div class="mission-layout">
+            <div
+              class="mission-tabs"
+              role="tablist"
+              aria-label="Mission verticals"
+              aria-orientation="vertical"
+            >
+              <button
+                class="tab"
+                id="vertical-tab-0"
+                role="tab"
+                aria-controls="vertical-panel"
+                aria-selected="true"
+                data-vertical="0"
+              >
+                01 / Emergency healthcare
+                <span>Cold-chain &amp; critical supplies</span>
+              </button>
+              <button
+                class="tab"
+                id="vertical-tab-1"
+                role="tab"
+                aria-controls="vertical-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-vertical="1"
+              >
+                02 / Extreme-environment defense
+                <span>High-altitude resupply</span>
+              </button>
+              <button
+                class="tab"
+                id="vertical-tab-2"
+                role="tab"
+                aria-controls="vertical-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-vertical="2"
+              >
+                03 / Enterprise &amp; disaster relief
+                <span>Industrial &amp; emergency cargo</span>
+              </button>
+            </div>
+            <div
+              id="vertical-panel"
+              class="mission-content"
+              role="tabpanel"
+              tabindex="0"
+              aria-labelledby="vertical-tab-0"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="specs">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">
+                <span class="section-num">05 /</span> Technical comparison
+              </div>
+              <h2>Every parameter. Side by side.</h2>
+            </div>
+            <p>
+              Unladen and full-load ranges are distinct targets. Endurance,
+              volume and recharge time remain to be specified.
+            </p>
+          </div>
+
+          <div class="table-controls">
+            <label for="compare-model">Highlight platform</label>
+            <select class="btn small" id="compare-model">
+              <option value="">All platforms</option>
+              <option value="0">AeroLifter-X5</option>
+              <option value="1">StratoCargo-10</option>
+              <option value="2">Vajra-X15</option>
+            </select>
+            <label
+              ><input type="checkbox" id="differences" /> Differences
+              only</label
+            >
+          </div>
+
+          <div
+            class="table-wrap"
+            tabindex="0"
+            aria-label="Scrollable aircraft comparison"
+          >
+            <table>
+              <caption>
+                Concept specification matrix · No certification or flight
+                qualification is represented.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">AeroLifter-X5</th>
+                  <th scope="col">StratoCargo-10</th>
+                  <th scope="col">Vajra-X15</th>
+                </tr>
+              </thead>
+              <tbody id="spec-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="compliance">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">
+                <span class="section-num">06 /</span> Indigenous innovation
+              </div>
+              <h2>Designed for an Indian ecosystem.</h2>
+            </div>
+            <p>
+              Local design, development and manufacturing are program goals.
+              Validation and regulatory approvals remain deployment
+              prerequisites.
+            </p>
+          </div>
+          <div class="trust-grid">
+            <article>
+              <h3>DGCA &amp; Digital Sky</h3>
+              <p>
+                Planned compliance review covers aircraft classification,
+                operational permissions and airspace checks. This concept does
+                not claim DGCA certification or BVLOS authorization.
+              </p>
+              <button class="text-btn" data-modal="compliance">
+                View regulatory readiness
+              </button>
+            </article>
+            <article>
+              <h3>Local manufacturing</h3>
+              <p>
+                Proposed Indian hardware and software integration with a local
+                assembly strategy. A 100% local supply chain is an ambition;
+                sourcing has not been audited.
+              </p>
+            </article>
+            <article>
+              <h3>Validation before deployment</h3>
+              <p>
+                Docking precision, ingress protection, thermal operation,
+                cold-chain integrity and communications require measured test
+                evidence before operational use.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="wrap contact-grid">
+          <div class="contact-copy">
+            <div class="eyebrow">
+              <span class="section-num">07 /</span> Deployment evaluation
+            </div>
+            <h2>
+              Define your<br /><span class="gradient">next mission.</span>
+            </h2>
+            <p>
+              Configure an evaluation request for your operating environment,
+              payload and delivery requirements.
+            </p>
+            <div class="mono">LOCAL DEMONSTRATION</div>
+            <p class="note">
+              This form creates an on-screen preview only. Nothing is sent,
+              stored on a server or shared. No follow-up will be scheduled.
+            </p>
+          </div>
+
+          <div class="card">
+            <form id="evalForm" novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="full-name">Full name *</label>
+                  <input
+                    id="full-name"
+                    name="name"
+                    autocomplete="name"
+                    required
+                    minlength="2"
+                    maxlength="100"
+                    placeholder="Your full name"
+                    aria-describedby="name-error"
+                  />
+                  <span class="error" id="name-error"></span>
+                </div>
+
+                <div class="field">
+                  <label for="email">Official email address *</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    maxlength="180"
+                    placeholder="name@organization.in"
+                    aria-describedby="email-error"
+                  />
+                  <span class="error" id="email-error"></span>
+                </div>
+
+                <div class="field">
+                  <label for="agency">Organization / agency *</label>
+                  <select
+                    id="agency"
+                    name="agency"
+                    required
+                    aria-describedby="agency-error"
+                  >
+                    <option value="">Select organization type</option>
+                    <option>Healthcare</option>
+                    <option>Defense/Military</option>
+                    <option>Enterprise Logistics</option>
+                    <option>Government R&amp;D</option>
+                  </select>
+                  <span class="error" id="agency-error"></span>
+                </div>
+
+                <div class="field">
+                  <label for="payload">Required payload *</label>
+                  <select
+                    id="payload"
+                    name="payload"
+                    required
+                    aria-describedby="payload-error"
+                  >
+                    <option value="">Select payload range</option>
+                    <option value="5">5 kg — AeroLifter-X5</option>
+                    <option value="10">10 kg — StratoCargo-10</option>
+                    <option value="15">15 kg — Vajra-X15</option>
+                    <option value="custom">Custom Heavy Fleet</option>
+                  </select>
+                  <span class="error" id="payload-error"></span>
+                </div>
+
+                <fieldset class="full">
+                  <legend>Operational environment *</legend>
+                  <div class="checks">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="environment"
+                        value="High Altitude"
+                        aria-describedby="environment-error"
+                      />
+                      High Altitude
+                    </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="environment"
+                        value="Urban B2B"
+                        aria-describedby="environment-error"
+                      />
+                      Urban B2B
+                    </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="environment"
+                        value="Rural Medical"
+                        aria-describedby="environment-error"
+                      />
+                      Rural Medical
+                    </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="environment"
+                        value="Extreme Cold/Monsoon"
+                        aria-describedby="environment-error"
+                      />
+                      Extreme Cold/Monsoon
+                    </label>
+                  </div>
+                  <span class="error" id="environment-error"></span>
+                </fieldset>
+
+                <div class="field full">
+                  <label for="requirements">Detailed requirements *</label>
+                  <textarea
+                    id="requirements"
+                    name="requirements"
+                    required
+                    minlength="20"
+                    maxlength="3000"
+                    rows="4"
+                    placeholder="Describe your region, payload, route length and delivery needs…"
+                    aria-describedby="requirements-error"
+                  ></textarea>
+                  <span class="error" id="requirements-error"></span>
+                </div>
+              </div>
+
+              <p class="form-note">
+                * Required fields · Demo only · Your request stays in this page
+              </p>
+              <button class="btn primary" style="width: 100%" type="submit">
+                Submit Evaluation Request
+              </button>
+            </form>
+
+            <div id="formSuccess" class="success" role="status" hidden>
+              <h3>Demo request prepared</h3>
+              <p id="success-summary"></p>
+              <p>
+                Nothing was transmitted. This is a local preview of your
+                evaluation request.
+              </p>
+              <button class="btn small" id="edit-request">Edit request</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <a class="brand" href="#main">
+              <svg aria-hidden="true"><use href="#drone-icon" /></svg>
+              <span data-brand>[COMPANY_NAME]</span>
+            </a>
+            <p>Indigenous High-Payload Autonomous Aerial Logistics</p>
+            <p>
+              Designed, developed and manufactured in India — program vision.
+            </p>
+          </div>
+
+          <div>
+            <h3>EXPLORE THE PLATFORM</h3>
+            <div class="footer-links">
+              <a href="#specs">Hardware Specifications</a>
+              <a href="#execution">Ground Software</a>
+              <button data-modal="compliance">DGCA Regulatory Matrix</button>
+              <button data-modal="cases">Defense Case Studies</button>
+              <button data-modal="api">Developer APIs</button>
+            </div>
+          </div>
+
+          <div>
+            <h3>TRUST &amp; INFORMATION</h3>
+            <div class="footer-links">
+              <button data-modal="privacy">Privacy Policy</button>
+              <button data-modal="security">Security Architecture</button>
+              <button data-modal="certifications">
+                Anti-Jamming Certifications
+              </button>
+              <button data-modal="terms">Terms of Use</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span
+            >© 2026 <span data-brand>[COMPANY_NAME]</span>. All rights
+            reserved.</span
+          >
+          <span>CONCEPT PLATFORM / SIMULATED OPERATIONS</span>
+        </div>
+      </div>
+    </footer>
+
+    <dialog id="info-modal" aria-labelledby="modal-title">
+      <div class="dialog-top">
+        <span class="eyebrow">Platform intelligence</span>
+        <button class="modal-close" aria-label="Close dialog">×</button>
+      </div>
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+    </dialog>
+
+    <noscript>
+      <p style="padding: 30px; background: #253246; color: white">
+        Enable JavaScript to explore simulated missions, fleet data, technical
+        comparisons and the local evaluation form.
+      </p>
+    </noscript>
+    <script>
+      "use strict";
+
+      // Replace this value with your company name.
+      const COMPANY_NAME = "[COMPANY_NAME]";
+
+      document.querySelectorAll("[data-brand]").forEach((el) => {
+        el.textContent = COMPANY_NAME;
+      });
+      document.title = COMPANY_NAME + " — Autonomous aerial logistics";
+
+      const $ = (id) => document.getElementById(id);
+
+      const models = [
+        {
+          key: "aero",
+          name: "AeroLifter-X5",
+          category: "MEDICAL & RAPID LOGISTICS",
+          payload: 5,
+          range: 65,
+          loaded: 45,
+          speed: 95,
+          ceiling: 4000,
+          battery: "Lithium-silicon solid-state · 6S / 22,000 mAh",
+          temperature: "−10°C to +45°C",
+          feature:
+            "Active Peltier cooling with a target 2°C–8°C payload range and temperature telematics.",
+          desc: "Cold-chain delivery of blood, vaccines, anti-venom and diagnostic samples. Organ transport requires payload-specific validation.",
+          tags: ["Cold-chain capsule", "Optical / IR docking"],
+          dock: "Optical / IR + RTK",
+          id: "MED-402",
+          region: "Hyderabad / Medical corridor",
+          station: "Station-Med-01",
+          alt: 1250,
+          baseSpeed: 89,
+          soc: 92,
+          progress: 42,
+          lat: 17.3958,
+          lon: 78.4697,
+          wind: 9,
+          temp: 22,
+          nominal: 22.2,
+          clearance: 180,
+          agency: "Healthcare",
+          environment: "Rural Medical",
+        },
+        {
+          key: "cargo",
+          name: "StratoCargo-10",
+          category: "ENTERPRISE & DISASTER RELIEF",
+          payload: 10,
+          range: 50,
+          loaded: 35,
+          speed: 80,
+          ceiling: 5000,
+          battery: "High-density LiFePO4 · dual-swappable pack",
+          temperature: "−10°C to +45°C",
+          feature:
+            "Automated winch deployment for payload delivery without landing on uneven terrain.",
+          desc: "Hub-to-hub industrial cargo, emergency rations and remote infrastructure tooling in a dual cargo vault.",
+          tags: ["Winch deployment", "Dual cargo vault"],
+          dock: "RTK + winch integration",
+          id: "IND-109",
+          region: "Bengaluru / Enterprise corridor",
+          station: "Hub-B2B South",
+          alt: 1020,
+          baseSpeed: 65,
+          soc: 71,
+          progress: 85,
+          lat: 12.9672,
+          lon: 77.5944,
+          wind: 12,
+          temp: 31,
+          nominal: 25.6,
+          clearance: 130,
+          agency: "Enterprise Logistics",
+          environment: "Urban B2B",
+        },
+        {
+          key: "vajra",
+          name: "Vajra-X15",
+          category: "EXTREME-ENVIRONMENT DEFENSE",
+          payload: 15,
+          range: 40,
+          loaded: 28,
+          speed: 110,
+          ceiling: 7000,
+          battery: "Sub-zero heated smart battery matrix",
+          temperature: "−20°C to +50°C",
+          feature:
+            "Proposed frequency-hopping link, radar-absorbent carbon frame and heated batteries for low-density, high-altitude air. Qualification remains pending.",
+          desc: "High-altitude outpost supplies, extreme-cold resupply and modular surveillance payload transport.",
+          tags: ["Heated battery matrix", "High-altitude design"],
+          dock: "Dual IR + RTK",
+          id: "DEF-809",
+          region: "Leh / Synthetic resupply corridor",
+          station: "Pad-04",
+          alt: 3420,
+          baseSpeed: 72,
+          soc: 84,
+          progress: 68,
+          lat: 34.1533,
+          lon: 77.5725,
+          wind: 18,
+          temp: 28,
+          nominal: 44.4,
+          clearance: 180,
+          agency: "Defense/Military",
+          environment: "High Altitude",
+        },
+      ];
+
+      const stages = [
+        {
+          title: "Google Maps AI route planning",
+          icon: "01",
+          desc: "Spatial intelligence, elevation contours and buffered BVLOS corridors in a proposed route-planning layer.",
+          details: [
+            "Planned satellite, elevation and infrastructure inputs for spatial model development; no Google data, training pipeline or API is connected in this demo.",
+            "Terrain-aware routing and geofenced corridors are design goals. Elevation inputs alone do not establish clearance from powerlines, trees or buildings.",
+            "Data licensing, obstacle sensing, airspace authorization and route validation must be resolved before flight.",
+          ],
+        },
+        {
+          title: "Precision ground-station docking",
+          icon: "02",
+          desc: "Local pad software connects visual and IR beacons, RTK positioning and payload latch verification.",
+          details: [
+            "Lightweight ground software is proposed for healthcare hubs, landing pads and forward supply stations.",
+            "Dual optical / IR markers and RTK differential positioning target less than 2 cm docking accuracy under validated conditions.",
+            "Payload release, temperature-controlled vault unlocking and latch verification are proposed station workflows. Zero-visibility performance is not established.",
+          ],
+        },
+        {
+          title: "Fleet telemetry & battery intelligence",
+          icon: "03",
+          desc: "Position, attitude, cell health and thermal behavior, synchronized with mission progress.",
+          details: [
+            "Proposed bi-directional cellular / SATCOM links carry coordinates, altitude, pitch, roll, yaw and airspeed.",
+            "Cell-level state of charge, temperature and adaptive discharge monitoring are architecture goals.",
+            "AES-256 is the proposed telemetry encryption standard across the fleet. All values in this interface are generated locally.",
+          ],
+        },
+        {
+          title: "Edge-AI adverse-environment failsafes",
+          icon: "04",
+          desc: "Visual-inertial navigation, automated return-to-base and emergency recovery concepts.",
+          details: [
+            "VIO and optical-flow navigation are proposed fallbacks when GNSS is unavailable.",
+            "The Vajra design target covers −20°C to +50°C and low-density high-altitude air. IP65 is a proposed ingress target, not a heavy-weather qualification.",
+            "Battery-triggered return-to-base and ballistic recovery are proposed failsafes. This demo does not implement flight-control or deployment logic.",
+          ],
+        },
+      ];
+
+      $("engine-cards").innerHTML = stages
+        .map(
+          (s, i) => `
+  <article class="card engine-card">
+    <span class="eyebrow">TIER ${s.icon}</span>
+    <div class="stage-icon" aria-hidden="true">${["⌖", "⊞", "≋", "◇"][i]}</div>
+    <h3>${s.title}</h3>
+    <p>${s.desc}</p>
+    <button class="text-btn" data-stage="${i}">Explore architecture</button>
+  </article>
+`,
+        )
+        .join("");
+
+      $("fleet-cards").innerHTML = models
+        .map(
+          (m) => `
+  <article class="card fleet-card" id="fleet-${m.key}">
+    <span class="eyebrow">${m.category}</span>
+    <h3>${m.name}</h3>
+    <p>${m.desc}</p>
+    <div class="payload-number">
+      <strong>${m.payload.toFixed(1)}</strong>
+      <span>KG / MAX PAYLOAD</span>
+    </div>
+    <dl class="spec-list">
+      <div>
+        <dt>Range · unladen / loaded</dt>
+        <dd>${m.range} / ${m.loaded} km</dd>
+      </div>
+      <div><dt>Max cruise target</dt><dd>${m.speed} km/h</dd></div>
+      <div><dt>Ceiling target</dt><dd>${m.ceiling.toLocaleString()} m AMSL</dd></div>
+      <div><dt>Temperature target</dt><dd>${m.temperature}</dd></div>
+    </dl>
+    <div>${m.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
+    <details>
+      <summary>Expand technical details</summary>
+      <p><strong>Battery:</strong> ${m.battery} (proposed).</p>
+      <p><strong>Special feature:</strong> ${m.feature}</p>
+      <p><strong>Landing:</strong> ${m.dock}; &lt; 2 cm target.</p>
+      <p><strong>Ingress:</strong> IP65 design target, untested.</p>
+      <p>
+        <strong>Volume, endurance, maximum wind resistance and recharge time:</strong>
+        to be specified and validated.
+      </p>
+    </details>
+    <button class="btn ${m.key === "vajra" ? "primary" : ""}"
+      data-evaluate="${m.key}">Evaluate ${m.name}</button>
+  </article>
+`,
+        )
+        .join("");
+
+      $("drone-tabs").innerHTML = models
+        .map(
+          (m, i) => `
+  <button class="tab" id="tab-${m.key}" role="tab"
+    aria-selected="${i === 0}" aria-controls="mission-panel"
+    tabindex="${i === 0 ? 0 : -1}" data-drone="${m.key}">
+    ${m.name}<span>MISSION ${m.id}</span>
+  </button>
+`,
+        )
+        .join("");
+
+      let activeKey = "aero";
+      let paused = false;
+      let tickCount = 0;
+
+      const states = {};
+
+      function initial(m) {
+        return {
+          soc: m.soc,
+          progress: m.progress,
+          alt: m.alt,
+          speed: m.baseSpeed,
+          wind: m.wind,
+          temp: m.temp,
+          lat: m.lat,
+          lon: m.lon,
+          pitch: 1.2,
+          roll: -0.4,
+          yaw: 62,
+          completed: false,
+          updated: null,
+        };
+      }
+
+      models.forEach((m) => (states[m.key] = initial(m)));
+      const model = () => models.find((m) => m.key === activeKey);
+
+      function selectDrone(key) {
+        activeKey = key;
+
+        document.querySelectorAll("[data-drone]").forEach((t) => {
+          const selected = t.dataset.drone === key;
+          t.setAttribute("aria-selected", selected);
+          t.tabIndex = selected ? 0 : -1;
+        });
+
+        $("mission-panel").setAttribute("aria-labelledby", "tab-" + key);
+        $("radar-name").textContent = model().name;
+        $("radar-mission").textContent = model().id + " / " + model().category;
+        renderTelemetry();
+      }
+
+      function renderTelemetry() {
+        const m = model();
+        const s = states[activeKey];
+
+        $("map-region").textContent = m.region.toUpperCase();
+        $("mission-id").textContent = m.id;
+        $("tele-alt").textContent = Math.round(s.alt).toLocaleString() + " m";
+
+        $("tele-clearance").textContent = s.completed
+          ? "Landed / 0 m clearance"
+          : "Terrain clearance " +
+            Math.round(m.clearance + s.alt - m.alt) +
+            " m";
+
+        $("tele-speed").textContent = s.speed.toFixed(0);
+        $("tele-wind").textContent = "Headwind " + s.wind.toFixed(1) + " knots";
+        $("tele-bat").textContent = s.soc.toFixed(1) + "%";
+
+        const color =
+          s.soc > 50
+            ? "var(--accent-green)"
+            : s.soc >= 20
+              ? "var(--accent-amber)"
+              : "var(--accent-red)";
+
+        $("tele-bat-bar").style.width = s.soc + "%";
+        $("tele-bat-bar").style.background = color;
+        $("battery-progress").setAttribute("aria-valuenow", s.soc.toFixed(1));
+
+        $("tele-voltage").textContent =
+          (m.nominal * (0.94 + (0.19 * s.soc) / 100)).toFixed(1) +
+          " V · " +
+          s.temp.toFixed(1) +
+          "°C · " +
+          (s.soc > 50 ? "NOMINAL" : s.soc >= 20 ? "CAUTION" : "LOW BATTERY");
+
+        $("tele-attitude").textContent =
+          `P ${s.pitch.toFixed(1)} / R ${s.roll.toFixed(1)}`;
+
+        $("tele-link").textContent =
+          `Yaw ${s.yaw.toFixed(0)}° · ${m.key === "vajra" ? "SATCOM" : "CELLULAR"} SIM`;
+
+        $("tele-coords").textContent =
+          s.lat.toFixed(5) + "° N / " + s.lon.toFixed(5) + "° E";
+
+        $("tele-station").textContent = m.station;
+
+        $("tele-beacon").textContent = s.completed
+          ? "IR locked · Docking complete"
+          : s.progress > 90
+            ? "IR acquiring · RTK active"
+            : "Pad active · IR standby · RTK active";
+
+        $("tele-payload").textContent =
+          m.payload.toFixed(1) +
+          " kg · " +
+          (s.completed ? "Delivered" : "Secured");
+
+        $("tele-temp").textContent =
+          m.key === "aero"
+            ? "Cold vault " +
+              (4 + Math.sin(tickCount / 6) * 0.2).toFixed(1) +
+              "°C / 2–8°C target"
+            : m.key === "vajra"
+              ? "Heated battery · Vault secured"
+              : "Winch stowed · Vault secured";
+
+        const phase = s.completed
+          ? "MISSION COMPLETE"
+          : s.progress > 90
+            ? "APPROACH / BEACON ACQUISITION"
+            : "EN ROUTE / WAYPOINT " +
+              Math.min(3, Math.floor(s.progress / 25) + 1);
+
+        $("tele-phase").textContent = phase;
+        $("tele-progress-pct").textContent =
+          s.progress.toFixed(1) + "% COMPLETE";
+        $("tele-progress-bar").style.width = s.progress + "%";
+        $("mission-progress").setAttribute(
+          "aria-valuenow",
+          s.progress.toFixed(1),
+        );
+
+        [...$("waypoints").children].forEach((el, i) => {
+          el.classList.toggle(
+            "current",
+            i === Math.min(4, Math.floor(s.progress / 25)),
+          );
+        });
+
+        const path = $("route-line");
+        const pt = path.getPointAtLength(
+          (path.getTotalLength() * s.progress) / 100,
+        );
+        $("map-drone").setAttribute("transform", `translate(${pt.x},${pt.y})`);
+
+        $("tele-log").textContent =
+          "SIM / " +
+          m.id +
+          " / " +
+          (s.completed
+            ? "Delivery complete. Reset to replay."
+            : paused
+              ? "Simulation paused"
+              : s.progress > 90
+                ? "Destination approach"
+                : "Telemetry nominal");
+
+        $("last-update").textContent = s.updated
+          ? "LAST TICK " + s.updated + " UTC"
+          : "UPDATE INTERVAL 2,000 MS";
+      }
+
+      function tick() {
+        if (paused || document.hidden) return;
+        tickCount++;
+
+        models.forEach((m) => {
+          const s = states[m.key];
+          if (s.completed) return;
+
+          s.progress = Math.min(100, s.progress + 0.32);
+          s.soc = Math.max(0, s.soc - 0.08);
+          s.alt = m.alt + Math.sin(tickCount * 0.4 + m.payload) * 3;
+          s.speed = Math.min(
+            m.speed,
+            Math.max(0, m.baseSpeed + Math.sin(tickCount * 0.6) * 2),
+          );
+          s.wind = Math.max(0, m.wind + Math.sin(tickCount * 0.3) * 1.8);
+          s.temp = m.temp + Math.sin(tickCount * 0.15) * 0.5;
+          s.lat = m.lat + (s.progress - m.progress) * 0.00013;
+          s.lon = m.lon + (s.progress - m.progress) * 0.00018;
+          s.pitch = Math.sin(tickCount * 0.5) * 2;
+          s.roll = Math.cos(tickCount * 0.35) * 1.1;
+          s.yaw = 62 + Math.sin(tickCount * 0.1) * 3;
+          s.updated = new Date().toISOString().slice(11, 19);
+
+          if (s.progress === 100) {
+            s.completed = true;
+            s.speed = 0;
+            s.alt = m.alt - m.clearance;
+            s.pitch = 0;
+            s.roll = 0;
+          }
+        });
+
+        renderTelemetry();
+      }
+
+      setInterval(tick, 2000);
+
+      $("pause").addEventListener("click", () => {
+        paused = !paused;
+        $("pause").textContent = paused
+          ? "Resume simulation"
+          : "Pause simulation";
+        $("pause").setAttribute("aria-pressed", paused);
+        $("feed-state").classList.toggle("running", !paused);
+        $("feed-state").innerHTML =
+          '<i class="dot" style="background:' +
+          (paused ? "var(--accent-amber)" : "var(--accent-green)") +
+          '"></i> ' +
+          (paused ? "SIMULATION PAUSED" : "SIMULATED FEED");
+        renderTelemetry();
+      });
+
+      $("reset").addEventListener("click", () => {
+        states[activeKey] = initial(model());
+        renderTelemetry();
+      });
+
+      document.querySelectorAll("[data-drone]").forEach((t) => {
+        t.addEventListener("click", () => selectDrone(t.dataset.drone));
+      });
+
+      document.querySelectorAll("[data-radar]").forEach((t) => {
+        const action = () => selectDrone(t.dataset.radar);
+        t.addEventListener("click", action);
+        t.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            action();
+          }
+        });
+      });
+
+      const verticals = [
+        {
+          title: "When every minute matters.",
+          label: "EMERGENCY HEALTHCARE",
+          desc: "A proposed cold-chain bridge between regional hospitals and hard-to-reach clinics, with temperature-aware handoff at both ends.",
+          items: [
+            "Blood, vaccines, anti-venom and urgent diagnostics",
+            "Peltier-cooled capsule with temperature telematics",
+            "Organ transport subject to clinical and route validation",
+          ],
+          stat: "2–8°C",
+          statLabel: "Payload temperature target",
+          key: "aero",
+        },
+        {
+          title: "Resupply beyond the road network.",
+          label: "HIGH-ALTITUDE & EXTREME DEFENSE",
+          desc: "A concept for routine supplies to remote outposts in sub-zero temperatures and low-density high-altitude air.",
+          items: [
+            "Heated battery matrix for extreme-cold resupply",
+            "Proposed encrypted frequency-hopping communication",
+            "Low-signature frame concept; no qualification claimed",
+          ],
+          stat: "15 kg",
+          statLabel: "Maximum payload target",
+          key: "vajra",
+        },
+        {
+          title: "Keep critical supplies moving.",
+          label: "ENTERPRISE & DISASTER RELIEF",
+          desc: "Connect industrial hubs and support isolated communities when roads are congested, damaged or inaccessible.",
+          items: [
+            "Hub-to-hub parcel and infrastructure-tool delivery",
+            "Emergency rations and disaster-zone resupply",
+            "Proposed winch deployment without a landing surface",
+          ],
+          stat: "35 km",
+          statLabel: "Full-load range target",
+          key: "cargo",
+        },
+      ];
+
+      function selectVertical(index) {
+        const v = verticals[index];
+
+        document.querySelectorAll("[data-vertical]").forEach((t) => {
+          const yes = +t.dataset.vertical === index;
+          t.setAttribute("aria-selected", yes);
+          t.tabIndex = yes ? 0 : -1;
+        });
+
+        $("vertical-panel").setAttribute(
+          "aria-labelledby",
+          "vertical-tab-" + index,
+        );
+        $("vertical-panel").innerHTML = `
+    <div>
+      <span class="eyebrow">${v.label}</span>
+      <h3>${v.title}</h3>
+      <p>${v.desc}</p>
+      <ul>${v.items.map((x) => `<li>${x}</li>`).join("")}</ul>
+      <button class="btn small" data-evaluate="${v.key}">
+        Configure evaluation
+      </button>
+    </div>
+    <div class="mission-stat">
+      <strong>${v.stat}</strong>
+      <span>${v.statLabel}</span>
+    </div>
+  `;
+      }
+
+      document.querySelectorAll("[data-vertical]").forEach((t) => {
+        t.addEventListener("click", () => selectVertical(+t.dataset.vertical));
+      });
+
+      // Keyboard navigation for both sets of tabs.
+      document.querySelectorAll("[role=tablist]").forEach((list) => {
+        list.addEventListener("keydown", (e) => {
+          const tabs = [...list.querySelectorAll("[role=tab]")];
+          const i = tabs.indexOf(document.activeElement);
+          if (i < 0) return;
+
+          const vertical = list.getAttribute("aria-orientation") === "vertical";
+          const next = vertical ? "ArrowDown" : "ArrowRight";
+          const prev = vertical ? "ArrowUp" : "ArrowLeft";
+          let n = i;
+
+          if (e.key === next) n = (i + 1) % tabs.length;
+          else if (e.key === prev) n = (i + tabs.length - 1) % tabs.length;
+          else if (e.key === "Home") n = 0;
+          else if (e.key === "End") n = tabs.length - 1;
+          else return;
+
+          e.preventDefault();
+          tabs[n].focus();
+          tabs[n].click();
+        });
+      });
+
+      const rows = [
+        ["Payload capacity (kg)", ...models.map((m) => m.payload.toFixed(1))],
+        ["Maximum range · unladen (km)", ...models.map((m) => m.range)],
+        ["Full-load range (km)", ...models.map((m) => m.loaded)],
+        [
+          "Operating ceiling · AMSL (m)",
+          ...models.map((m) => m.ceiling.toLocaleString()),
+        ],
+        ["Maximum cruise (km/h)", ...models.map((m) => m.speed)],
+        [
+          "AI navigation engine",
+          "Proposed spatial route AI",
+          "Proposed spatial route AI",
+          "Proposed spatial route AI",
+        ],
+        ["Ground-station integration", ...models.map((m) => m.dock)],
+        ["Landing precision target", "< 2 cm", "< 2 cm", "< 2 cm"],
+        ["Temperature operating limits", ...models.map((m) => m.temperature)],
+        [
+          "Radio link encryption target",
+          "AES-256",
+          "AES-256",
+          "AES-256 + frequency hopping",
+        ],
+        [
+          "Parachute failsafe",
+          "Proposed ballistic recovery",
+          "Proposed ballistic recovery",
+          "Proposed ballistic recovery",
+        ],
+        ["Battery architecture", ...models.map((m) => m.battery)],
+        [
+          "Ingress protection target",
+          "IP65 · untested",
+          "IP65 · untested",
+          "IP65 · untested",
+        ],
+        [
+          "Endurance / volume / recharge",
+          "To be validated",
+          "To be validated",
+          "To be validated",
+        ],
+        [
+          "Price / deployment model",
+          "Evaluation-based · price TBD",
+          "Evaluation-based · price TBD",
+          "Evaluation-based · price TBD",
+        ],
+      ];
+
+      function renderTable() {
+        const only = $("differences").checked;
+        const highlight = $("compare-model").value;
+        $("spec-body").replaceChildren();
+
+        rows
+          .filter((r) => !only || new Set(r.slice(1).map(String)).size > 1)
+          .forEach((r) => {
+            const tr = document.createElement("tr");
+
+            r.forEach((value, i) => {
+              const c = document.createElement(i ? "td" : "th");
+              if (!i) c.scope = "row";
+              c.textContent = value;
+
+              if (i && highlight !== "" && i === +highlight + 1) {
+                c.className = "highlight";
+              }
+              tr.append(c);
+            });
+
+            $("spec-body").append(tr);
+          });
+
+        document.querySelectorAll("thead th").forEach((c, i) => {
+          c.classList.toggle(
+            "highlight",
+            highlight !== "" && i === +highlight + 1,
+          );
+        });
+      }
+
+      $("differences").addEventListener("change", renderTable);
+      $("compare-model").addEventListener("change", renderTable);
+
+      const info = {
+        privacy: {
+          title: "Privacy policy · local demo",
+          text: "This single-file demo has no analytics, tracking, cookies, local storage, remote fonts or network requests. Form entries exist only in the current page and disappear on reload. Downloaded copies are under your control. A production service would need its own reviewed privacy policy.",
+        },
+        security: {
+          title: "Proposed security architecture",
+          text: "The concept specifies AES-256 telemetry, authenticated ground-station access and encrypted cellular / SATCOM transport. These are aircraft-system goals. This website does not implement a telemetry connection, encryption service or mission-control backend.",
+        },
+        certifications: {
+          title: "Anti-jamming certification status",
+          text: "No certification, test report or independent qualification has been supplied. Frequency hopping and GPS-denied navigation are proposed capabilities only. No ISO 27001, DGCA or anti-jamming certification is claimed.",
+        },
+        compliance: {
+          title: "Regulatory readiness",
+          text: "This is a concept readiness register, not a statement of regulatory approval or legal guidance. Aircraft category, type certification, registration, operating permissions, pilot requirements, airspace access and BVLOS authorization require current assessment for the intended operation. Green-zone status is not presented here as certification. All readiness items remain unverified.",
+        },
+        cases: {
+          title: "Defense mission concepts",
+          text: "The Vajra-X15 section illustrates high-altitude supply transport and extreme-cold resupply. No real deployment, military customer, field trial or published case study has been supplied. Mission DEF-809 and its route are synthetic.",
+        },
+        api: {
+          title: "Developer API preview",
+          text: "No live API is available. The demo uses an in-memory model for vehicle ID, coordinates, altitude, airspeed, battery state of charge, temperature, ground station and progress. Production integrations would require authenticated endpoints, device identity and a documented data contract.",
+        },
+        terms: {
+          title: "Terms of use · demonstration",
+          text: "This application is an interactive concept demonstration. Specifications are targets, telemetry is synthetic and forms do not send requests. It must not be used for navigation, aircraft control, medical transport decisions or evidence of regulatory compliance.",
+        },
+      };
+
+      const modal = $("info-modal");
+      let returnFocus = null;
+
+      function openModal(title, text, items) {
+        returnFocus = document.activeElement;
+        $("modal-title").textContent = title;
+        $("modal-body").replaceChildren();
+
+        if (text) {
+          const p = document.createElement("p");
+          p.textContent = text;
+          $("modal-body").append(p);
+        }
+
+        if (items) {
+          const ul = document.createElement("ul");
+          items.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            ul.append(li);
+          });
+          $("modal-body").append(ul);
+        }
+
+        modal.showModal();
+        modal.querySelector("button").focus();
+      }
+
+      modal
+        .querySelector("button")
+        .addEventListener("click", () => modal.close());
+
+      modal.addEventListener("click", (e) => {
+        const r = modal.getBoundingClientRect();
+        if (
+          e.target === modal &&
+          (e.clientX < r.left ||
+            e.clientX > r.right ||
+            e.clientY < r.top ||
+            e.clientY > r.bottom)
+        ) {
+          modal.close();
+        }
+      });
+
+      modal.addEventListener("close", () => returnFocus?.focus());
+
+      document.addEventListener("click", (e) => {
+        const stage = e.target.closest("[data-stage]");
+        const inf = e.target.closest("[data-modal]");
+        const evalBtn = e.target.closest("[data-evaluate]");
+
+        if (stage) {
+          const s = stages[+stage.dataset.stage];
+          openModal(s.title, null, s.details);
+        }
+
+        if (inf) {
+          const i = info[inf.dataset.modal];
+          openModal(i.title, i.text);
+        }
+
+        if (evalBtn) {
+          const m = models.find((m) => m.key === evalBtn.dataset.evaluate);
+
+          $("evalForm").hidden = false;
+          $("formSuccess").hidden = true;
+          $("payload").value = String(m.payload);
+          $("agency").value = m.agency;
+
+          document.querySelectorAll("[name=environment]").forEach((c) => {
+            c.checked = c.value === m.environment;
+          });
+
+          validateField($("payload"));
+          validateField($("agency"));
+          validateEnvironment();
+
+          $("contact").scrollIntoView();
+          $("full-name").focus({ preventScroll: true });
+        }
+      });
+
+      $("defense-link").addEventListener("click", (e) => {
+        e.preventDefault();
+        $("fleet-vajra").querySelector("details").open = true;
+        $("fleet-vajra").scrollIntoView();
+      });
+
+      const form = $("evalForm");
+
+      function validateField(el) {
+        let msg = "";
+        const value = el.value.trim();
+
+        if (!value) {
+          msg = "Please complete this field.";
+        } else if (el.type === "email" && el.validity.typeMismatch) {
+          msg = "Enter a valid email address.";
+        } else if (el.minLength > 0 && value.length < el.minLength) {
+          msg = "Use at least " + el.minLength + " characters.";
+        }
+
+        el.setAttribute("aria-invalid", !!msg);
+        $(el.getAttribute("aria-describedby")).textContent = msg;
+        return !msg;
+      }
+
+      function validateEnvironment() {
+        const checked =
+          form.querySelectorAll("[name=environment]:checked").length > 0;
+
+        $("environment-error").textContent = checked
+          ? ""
+          : "Choose at least one operating environment.";
+
+        form.querySelectorAll("[name=environment]").forEach((c) => {
+          c.setAttribute("aria-invalid", !checked);
+        });
+
+        return checked;
+      }
+
+      const fields = [
+        ...form.querySelectorAll(".field input,.field select,.field textarea"),
+      ];
+
+      fields.forEach((el) => {
+        el.addEventListener("blur", () => validateField(el));
+
+        el.addEventListener("input", () => {
+          if (el.hasAttribute("aria-invalid")) validateField(el);
+        });
+
+        el.addEventListener("change", () => validateField(el));
+      });
+
+      form.querySelectorAll("[name=environment]").forEach((el) => {
+        el.addEventListener("change", validateEnvironment);
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const valid = fields.map(validateField).every(Boolean);
+        const environmentValid = validateEnvironment();
+
+        if (!valid || !environmentValid) {
+          form.querySelector("[aria-invalid=true]").focus();
+          return;
+        }
+
+        const data = new FormData(form);
+        const payload = $("payload").selectedOptions[0].textContent;
+
+        $("success-summary").textContent =
+          `${data.get("name").trim()}, your ${payload} evaluation for ` +
+          `${data.get("agency")} is ready to review. Environments: ` +
+          `${data.getAll("environment").join(", ")}.`;
+
+        form.hidden = true;
+        $("formSuccess").hidden = false;
+        $("edit-request").focus();
+      });
+
+      $("edit-request").addEventListener("click", () => {
+        form.hidden = false;
+        $("formSuccess").hidden = true;
+        $("full-name").focus();
+      });
+
+      $("menu").addEventListener("click", () => {
+        const open = $("menu").getAttribute("aria-expanded") !== "true";
+        $("menu").setAttribute("aria-expanded", open);
+        $("navigation").classList.toggle("open", open);
+      });
+
+      $("navigation")
+        .querySelectorAll("a")
+        .forEach((a) => {
+          a.addEventListener("click", () => {
+            $("navigation").classList.remove("open");
+            $("menu").setAttribute("aria-expanded", false);
+          });
+        });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && $("navigation").classList.contains("open")) {
+          $("navigation").classList.remove("open");
+          $("menu").setAttribute("aria-expanded", false);
+          $("menu").focus();
+        }
+      });
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          document
+            .querySelector(".header")
+            .classList.toggle("scrolled", scrollY > 25);
+        },
+        { passive: true },
+      );
+
+      selectDrone("aero");
+      selectVertical(0);
+      renderTable();
+    </script>
+  </body>
+</html>
